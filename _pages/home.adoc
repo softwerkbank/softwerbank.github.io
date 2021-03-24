@@ -1,8 +1,11 @@
 ---
 permalink: /
-layout: home
-author_profile: false
+author_profile: true
 header:
   image: /assets/images/splash_small.jpg
   caption: "Photo credit: [**Adi Goldstein**](https://unsplash.com/photos/mDinBvq1Sfg)"
 ---
+
+= Im Aufbau
+
+TIP: Hier entsteht in Kürze mein persönlicher Blog zum Thema Softwareentwicklung

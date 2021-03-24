@@ -1,7 +1,0 @@
-main:
-  - title: "Blog"
-    description: "Der Softwerkbank Blog"
-    url: /blog/
-  - title: "Über SWB"
-    description: "Beschreibung des Blogs und des Autors"
-    url: /about/
