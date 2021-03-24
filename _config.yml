@@ -106,10 +106,6 @@ defaults:
 
 collections_dir: collections
 
-tag_archive:
-  type: liquid
-  path: /tags/
-
 analytics:
   provider: "google-gtag"
   google:
