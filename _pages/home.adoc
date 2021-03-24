@@ -1,0 +1,8 @@
+---
+permalink: /
+layout: home
+author_profile: false
+header:
+  image: /assets/images/splash_small.jpg
+  caption: "Photo credit: [**Adi Goldstein**](https://unsplash.com/photos/mDinBvq1Sfg)"
+---

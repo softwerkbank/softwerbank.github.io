@@ -1,0 +1,11 @@
+= Einführung in BDD mit Cucumber
+:page-category: Testing
+:page-tags: [Cucumber, BDD, Testing]
+
+Da ich mich in letzter Zeit beruflich mit **B**ehavior-**D**riven-**D**evelopment und Cucumber auseinandersetze, ist es naheliegend einen Artikel zu diesem Thema zu schreiben.
+Dieser Artikel soll als Einführung in beide Themen dienen. 
+Zunächst werde ich kurz erklären was unter BDD zu verstehen ist. 
+Im Anschluss wird dann das Testframework Cucumber, mithilfe von Codebeispielen vorgestellt.
+
+== Was bedeutet BDD?
+

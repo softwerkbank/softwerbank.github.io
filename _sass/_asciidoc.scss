@@ -1,0 +1,194 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
+
+// Callouts
+.conum[data-value] {
+  display: inline-block;
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  text-align: center;
+  font-size: $type-size-6;
+  width: 1.67em;
+  height: 1.67em;
+  line-height: 1.67em;
+  font-family: "Open Sans", "DejaVu Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.conum[data-value]::after {
+  content: attr(data-value);
+}
+
+.conum[data-value] + b {
+  display: none;
+}
+
+// Table for callouts
+.colist > table {
+  border: none;
+  background: none;
+  font-size: 1em;
+}
+
+.colist > table > tbody > tr > td {
+  border: none;
+  padding: 0.25em;
+}
+
+code {
+  color: #222;
+  font-size: 16px;
+}
+
+p code {
+    background-color: #ededed;
+}
+
+pre {
+  line-height: initial;
+}
+
+// admonitions
+.icon {
+  height: initial;
+}
+
+.admonitionblock {
+  //width: 80%;
+  margin: 30px auto;
+  font-family: Open Sans;
+  font-style: italic;
+  color: #555555;
+  padding: 1.2em 10px 1.2em 10px;
+  border-left: 8px solid #f21368;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  line-height: 1.4;
+  position: relative;
+  background: #ededed;
+}
+
+span.icon > .fa {
+  cursor: default;
+}
+
+.admonitionblock table {
+  font-size: 1em;
+  margin: 0;
+}
+
+.admonitionblock td {
+  border: none;
+}
+
+.admonitionblock td.icon {
+  text-align: center;
+  width: 80px;
+}
+.admonitionblock td.icon [class^="fa icon-"] {
+  font-size: 2.5em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: default;
+}
+.admonitionblock td.icon .icon-note:before {
+  content: "\f05a";
+  color: #19407c;
+}
+.admonitionblock td.icon .icon-tip:before {
+  content: "\f0eb";
+  //text-shadow: 1px 1px 2px rgba(155,155,0,.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: #cccc00;
+}
+.admonitionblock td.icon .icon-warning:before {
+  content: "\f071";
+  color: #bf6900;
+}
+.admonitionblock td.icon .icon-caution:before {
+  content: "\f06d";
+  color: #bf3400;
+}
+.admonitionblock td.icon .icon-important:before {
+  content: "\f06a";
+  color: #bf0000;
+}
+
+// Quoteblock
+.quoteblock {
+  //width: 80%;
+  margin: 30px auto;
+  font-family: Open Sans;
+  font-style: italic;
+  color: #555555;
+  padding: 1.2em 30px 1.2em 75px;
+  border-left: 8px solid #f21368;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  line-height: 1.4;
+  position: relative;
+  background: #ededed;
+}
+
+.quoteblock::before {
+  font-family: Arial;
+  content: "\201C";
+  color: #f21368;
+  font-size: 6em;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+}
+
+.quoteblock::after {
+  content: "";
+}
+
+.quoteblock .attribution {
+  display: block;
+  color: #333333;
+  font-style: normal;
+  font-weight: bold;
+  text-align: right;
+}
+
+.quoteblock blockquote {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quoteblock p {
+  margin-bottom: 0.3em;
+}
+
+// Imageblock
+.imageblock {
+  display: table;
+  margin: 30px auto;
+  font-family: Open Sans;
+  font-style: italic;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  line-height: 1.4;
+  position: relative;
+  background: #ededed;
+}
+
+.imageblock .content {
+  text-align: center;
+}
+
+.imageblock .content img {
+  border-radius: 4px 4px 0 0;
+}
+
+.imageblock .title {
+  padding: 10px;
+  background-color: #f21368;
+  border-radius: 0 0 4px 4px;
+  -webkit-border-radius: 0 0 4px 4px;
+  color: $text-color;
+  text-align: center;
+}

@@ -1,0 +1,19 @@
+---
+permalink: /about/
+---
+= Über Softwerkbank
+
+Der Name `Softwerkbank` ist aus den Worten _Software_ und _Werkbank_ zusammengesetzt. Die Softwareentwicklung wird in verschiedenen Communities als Handwerk angesehen. Ein Handwerker oder, in diesem Fall, ein Softwerker benötigt unterschiedliche Werkzeuge für die Umsetzung seiner Projekte. Dabei wird als Arbeitsbereich meist eine Werkbank verwendet, die die verschiedenen Werkzeuge beherbergt. Hier soll es hauptsächlich um die verschiedenen Werkzeuge (Methoden, Technologien etc.) gehen, die bei der Softwareentwicklung eingesetzt werden.   
+
+Diese Seite wurde ins Leben gerufen, um mein Wissen im, sich schnell verändernden, IT-Umfeld aktuell zu halten. 
+Bei meiner Arbeit in verschiedenen IT-Projekten liegt der Fokus zumeist nur auf die im Projekt verwendeten Technologien. 
+Somit möchte ich diese Seite nutzen um Kenntnisse in Technologien und Methoden aufzubauen und zu erweitern, mit denen ich keine direkten Berührungspunkten in meiner täglichen Arbeit habe.
+Das dabei erworbene Wissen möchte ich hier in Form von Tutorials und Blog-Beiträgen teilen. 
+Vielleicht ist das hier dokumentierte Wissen für den einen oder anderen Softwareentwickler oder -architekt hilfreich.
+Des Weiteren dient diese Seite auch für mich persönlich als Nachschlagewerk bzw. Referenz. 
+
+== Über mich
+
+Ich bin ein begeisterter Softwerker im Enterprise-Java-Umfeld. 
+In meinem beruflichen Werdegang habe ich bei der Umsetzung verschiedener IT-Projekte in den Bereichen öffentliche Verwaltung, innere Sicherheit und Versicherungen mitgewirkt. 
+Neben den Bereichen der Softwarearchitektur und -entwicklung interessiere ich mich auch für agile Entwicklungsmethoden.

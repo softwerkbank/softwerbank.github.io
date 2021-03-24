@@ -1,0 +1,148 @@
+= Einrichtung von Cucumber mit JUnit 5
+:page-liquid:
+:page-category: Testing
+:page-tags: [Cucumber, BDD, JUnit5, Testing]
+:url-einfuehrung: {{site.url}}{% post_url 2021-03-10-Cucumber-Einfuehrung %}
+
+In diesem Artikel möchte ich zeigen, wie das **B**ehavior-**D**riven-**D**evelopment-Werkzeug Cucumber zusammen mit JUnit 5 eingesetzt werden kann. 
+Neben Cucumber und JUnit 5 wird in diesem Codebeispiel auch Maven eingesetzt.
+
+== Cucumber
+
+Cucumber ist ein Tool um Anforderungen an eine Software textuell in natürlicher Sprache zu spezifizieren und diese automatisiert auf die korrekte Umsetzung zu überprüfen. 
+Dabei wird das Verhalten eines Systems mithilfe von _Feature Files_ unter Verwendung der https://martinfowler.com/bliki/GivenWhenThen.html[Given-When-Then]-Methode beschrieben. 
+
+[source, gherkin]
+----
+Feature: Addition
+
+  Scenario: Addition von zwei positiven Zahlen
+    Given Zahl a mit dem Wert 5
+    And Zahl b mit dem Wert 3
+    When Addiere Zahl a und Zahl b
+    Then Ergbnis ist 8
+----
+
+Mithilfe von Glue-Code (https://cucumber.io/docs/cucumber/step-definitions/[Step-Definitions]) werden die einzelnen Schritte zur Ausführung gebracht:
+
+[source, java]
+----
+public class CalculatorAdditionStepDefs implements En {
+
+    public CalculatorAdditionStepDefs() {
+        Given("^number (\\w) with value (\\d)", (String variable, Integer value) -> { 
+            // Step implementation
+        });
+
+        When("^add number (\\w) and (\\w)", (String firstVariable, String secondVariable) -> {
+            // Step implementation	
+        });
+
+        Then("^result is (\\d)", (Integer result) -> {
+            // Step implementation
+        });
+    }
+}
+----
+
+TIP: Eine umfangreichere Einführung in BDD und Cucumber kann in {url-einfuehrung}[Einführung in BDD mit Cucumber] nachgelesen werden.
+
+== Benötigte Dependencies
+
+Um Cucumber mit JUnit 5 zu integrieren, werden drei Dependencies benötigt.
+
+[source, xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId> <1>
+        <version>5.7.1</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-java8</artifactId> <2>
+        <version>6.10.2</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-junit-platform-engine</artifactId> <3>
+        <version>6.10.2</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+----
+<1> Da wir JUnit 5 verwenden wollen, müssen wir das entsprechende API einbinden.
+<2> Um bei der Step Definition die, oben gezeigte, Java 8 Syntax verwenden zu können, wird diese Abhängigkeit benötigt. 
+<3> Diese Abhängigkeit sorgt für die Integration von Cucumber mit JUnit 5.
+
+[IMPORTANT]
+====
+Die Ausführung der Tests mit dem `maven-surefire-plugin` in Version `3.0.0-M5` funktioniert, jedoch wirken sich die
+Testresultate nicht auf den Erfolg des Maven-Builds aus und die Szenarien werden nicht in die Testergebnisse aufgenommen.
+Aus diesem Grund wurde im Codebeispiel die Version `2.22.2` verwendet.
+
+Einen entsprechenden Bug habe ich im https://issues.apache.org/jira/browse/SUREFIRE-1896[Apache Jira] erstellt.
+====
+
+== Testausführung
+
+Damit Maven Surefire die Cucumber Szenarien entdecken und ausführen kann, ist ein Workaround notwendig (siehe https://github.com/cucumber/cucumber-jvm/tree/main/junit-platform-engine#surefire-and-gradle-workarounds[cucumber-junit-platform-engine]). 
+Als Workaround wird eine leere Test Klasse angelegt und mit der `@Cucumber` Annotation versehen:
+
+[source, java]
+----
+package ch.swb.cucumber.example;
+
+import io.cucumber.junit.platform.engine.Cucumber;
+
+@Cucumber
+public class RunCucumberTest {
+
+}
+----
+
+Durch diese Klasse wird Cucumber mitgeteilt in welchem Package die Feature-Dateien liegen. 
+Diese müssen entsprechend im selben oder in einem darunterliegenden Package verortet sein. 
+Die folgende Grafik zeigt die Struktur des `src/test/resources` Verzeichnisses:
+
+.Verzeichnisstruktur
+[plantuml, 20210317/src_test_resources, svg]
+....
+@startsalt
+{
+{T
+ + src/test/resources
+ ++ ch
+ +++ swb
+ ++++ cucumber
+ +++++ example
+ ++++++ addition.feature
+ ++ junit-platform.properties
+}
+}
+@endsalt
+....
+
+In der Datei `junit-platform.properties` können der JUnit Platform verschiedenen Eigenschaften mitgeteilt werden.
+Bei diesem Codebeispiel wurden folgende Eigenschaften gesetzt:
+
+[source, properties]
+----
+cucumber.glue=ch.swb.cucumber <1>
+cucumber.publish.quiet=true <2>
+cucumber.plugin=pretty,html:target/site/cucumber-pretty.html <3>
+----
+<1> kommaseparierte Liste von package-Namen, in denen sich der Glue-Code befindet
+<2> Unterdrückung der Ausgabe des Publish-Banners nach der Testausführung
+<3> kommaseparierte Liste welche Plugins verwendet werden sollen
+
+Eine Liste der untersützten Eigenschaften ist auf der https://github.com/cucumber/cucumber-jvm/tree/main/junit-platform-engine#configuration-options[GitHub-Seite] der Cucumber JUnit Platform Engine dokumentiert.
+
+== Quellcode
+
+Der Quellcode des Beispiels ist in meinem https://github.com/softwerkbank/cucumber-examples/tree/main/cucumber-junit5-example[GitHub Account] veröffentlicht.
