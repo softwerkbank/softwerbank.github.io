@@ -111,7 +111,7 @@ Diese müssen entsprechend im selben oder in einem darunterliegenden Package ver
 Die folgende Grafik zeigt die Struktur des `src/test/resources` Verzeichnisses:
 
 .Verzeichnisstruktur
-[plantuml, 20210317/src_test_resources, svg]
+[plantuml, 20210326/src_test_resources, svg]
 ....
 @startsalt
 {

@@ -1,0 +1,51 @@
+= Umsetzung der Webseite
+:page-category: Webseite
+:page-tags: [Jekyll, AsciiDoc]
+
+Als ersten Artikel bietet es sich an, darüber zu schreiben, wie diese Webseite umgesetzt wurde. 
+Die Seite wurde mit dem Static Site Generator https://jekyllrb.com/[Jekyll] erstellt. 
+Auf diese Art von Generatoren und speziell auf Jekyll bin ich gestossen als ich mich mit dem Thema _Documentation-as-Code_ befasst habe.
+Ich fand die Idee, Webseiten als statische Inhalte auszuliefern super und habe erste Experimente mit Jekyll durchgeführt.
+Wäre ich nicht auf die Static Site Generatoren aufmerksam geworden, hätte ich mich vermutlich nicht dazu entschlossen eine Webseite zu erstellen.
+
+In den folgenden Abschnitten stelle ich Euch die einzelnen Teile der Webseite vor.
+
+== Jekyll
+
+Jekyll wurde von https://en.wikipedia.org/wiki/Tom_Preston-Werner[Tom Preston-Werner], den Co-Founder von GitHub, in Ruby geschrieben und eignet sich hervorragend um Inhalte kostenlos per https://docs.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll[GitHub Pages] zu veröffentlichen.
+Dabei nimmt Jekyll Inhalte in Form von Markdown, HTML und CSS als Input entgegen und erzeugt daraus statische HTML Seiten. 
+Als Template Engine verwendet Jekyll https://shopify.github.io/liquid/[Liquid], die von Shopify entwickelt wird (ebenfalls in Ruby).
+
+image::20210320/jekyll_in_out.svg["Jekyll In- und Output", title="Jekyll In- und Output"]
+
+Metadaten (wie beispielsweise Titel, Layout oder Tags) werden einem Artikel per https://jekyllrb.com/docs/front-matter/[Front Matter] mitgeteilt. 
+Das Front Matter wird im YAML Format geschrieben und am Beginn einer Datei eingefügt werden.
+
+== AsciiDoc
+
+Da ich mich in der Vergangenheit mehr Erfahrungen mit AsciiDoc als Markdown gesammelt habe, wollte ich auch AsciiDoc als Auszeichnungssprache verwenden.
+Ausserdem ist die Syntax von AsciiDoc umfangreicher und kann somit komplexere Inhalte wie Tabellen und Admonitions (Tips, Warnungen etc.) darstellen.
+Ein Vergleich beider Auszeichnungssprachen kann in der https://docs.asciidoctor.org/asciidoc/latest/asciidoc-vs-markdown/[AsciiDoctor Dokumentation] nachgelesen werden. 
+
+Um AsciiDoc mit Jekyll verwenden zu können, wird das https://github.com/asciidoctor/jekyll-asciidoc[Jekyll AsciiDoc Plugin] verwendet.
+
+== Minimal Mistakes (Theme)
+
+Jekyll besitzt ein umfangreiches https://jekyllrb.com/docs/themes/[Theme-System]. 
+Es gibt eine grosse Anzahl von kostenfreien und kostenpflichtigen Themes, die auf unterschiedliche Anwendungsfälle (Portfolio, Blogs, Landing Pages etc.) ausgerichtet sind. 
+
+Ich habe mich für das kostenfreie https://mmistakes.github.io/minimal-mistakes/[Minimal Mistakes] Theme entschieden.
+Das Theme kann super an persönliche Bedürfnisse angepasst werden und der Funktionsumfang ist ebenfalls super. 
+
+== Publishing
+
+Wie bereits erwähnt, integriert sich Jekyll hervorragend mit GitHub Pages.
+Allerdings stimmt das nur, wenn man keine speziellen Plugins verwendet.
+Leider ist das Jekyll AsciiDoc Plugin nicht auf der Whitelist, weshalb das Publishing etwas komplizierter ist.
+
+Deshalb musste ich hier den Umweg über Travis CI gehen, was für Open Source Projekt kostenfrei ist. 
+Der Continuous Delivery Prozess ist in der folgenden Abbildung dargestellt:
+
+image::20210320/publishing_github_pages.svg["Continuous Delivery", title="Continuous Delivery"]
+
+Eine genaue Anleitung zur Einrichtung kann im Blogpost https://eshepelyuk.github.io/2014/10/28/automate-github-pages-travisci.html[Automate GitHub Pages publishing with Jekyll and Travis CI] nachgelesen werden.
