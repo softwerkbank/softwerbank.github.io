@@ -3,9 +3,16 @@
 :page-tags: [Cucumber, BDD, Testing]
 
 Da ich mich in letzter Zeit beruflich mit **B**ehavior-**D**riven-**D**evelopment und Cucumber auseinandersetze, ist es naheliegend einen Artikel zu diesem Thema zu schreiben.
-Dieser Artikel soll als Einführung in beide Themen dienen. 
-Zunächst werde ich kurz erklären was unter BDD zu verstehen ist. 
-Im Anschluss wird dann das Testframework Cucumber, mithilfe von Codebeispielen vorgestellt.
+Dieser Artikel soll als Einführung in beide Themen dienen, wobei zunächst BDD und anschliessend Cucumber vorgestellt werden. 
 
 == Was bedeutet BDD?
+
+**B**ehavior-**D**riven-**D**evelopment ist eine kollaborative Methode, die sich perfekt in bestehende agile Entwicklungsprozesse integrieren lässt.
+Durch die engere Zusammenarbeit wird die Lücke zwischen Fachexperten und Softwareentwicklern geschlossen und somit ein gemeinsames Verständnis über das zu lösende Problem erarbeitet.
+Unterstützt wird dies durch schnelle, kleine Iterationen um gezielt kleine Teile des Systems anzupassen und so schneller Feedback zu erhalten und dieses zu verbessern.
+Die konsequente Anwendung von BDD ermöglicht eine kontinuierliche Überprüfung und Dokumentation (lebendige Dokumentation) des Systemverhaltens.
+
+BDD ist ein iterativer Prozess, der aus drei Schritten (Praktiken) besteht, der in der folgenden Abbildung dargestellt ist.
+
+image::20210323/bdd_three_practices.svg["Drei Praktiken des BDD", title="Drei Praktiken des BDD"]
 

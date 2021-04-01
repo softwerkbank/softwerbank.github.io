@@ -2,7 +2,7 @@
 :page-liquid:
 :page-category: Testing
 :page-tags: [Cucumber, BDD, JUnit5, Testing]
-:url-einfuehrung: {{site.url}}{% post_url 2021-03-10-Cucumber-Einfuehrung %}
+:url-einfuehrung: {{site.url}}{% post_url 2021-03-23-Cucumber-Einfuehrung %}
 
 In diesem Artikel möchte ich zeigen, wie das **B**ehavior-**D**riven-**D**evelopment-Werkzeug Cucumber zusammen mit JUnit 5 eingesetzt werden kann. 
 Neben Cucumber und JUnit 5 wird in diesem Codebeispiel auch Maven eingesetzt.
