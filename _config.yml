@@ -67,7 +67,7 @@ include: ["_pages"]
 
 author:
   name   : "Kevin Werner"
-  avatar : "/assets/images/avatar.svg"
+  avatar : "/assets/images/Profilbild.jpeg"
   bio    : "Begeisterter Softwareentwickler und -architekt mit dem Ziel qualitativ hochwertige Software umzusetzen."
   location: "Bern, Switzerland"
   links:

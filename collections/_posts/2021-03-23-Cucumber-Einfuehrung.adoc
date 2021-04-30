@@ -16,3 +16,62 @@ BDD ist ein iterativer Prozess, der aus drei Schritten (Praktiken) besteht, der 
 
 image::20210323/bdd_three_practices.svg["Drei Praktiken des BDD", title="Drei Praktiken des BDD"]
 
+Alles beginnt mit einer https://de.wikipedia.org/wiki/User_Story[User Story], mit der das System geändert oder erweitert werden soll und endet mit funktionierender Software.
+Mittendrin und somit im täglichen Prozess integriert stehen die drei Phasen _Discovery_, _Formulation_ und _Automation_.
+
+=== Discovery
+
+Eine initial formulierte User Story wird durch ein kurzes (ca. 30 Minuten), strukturiertes Meeting, genannt Discovery Workshop, mit allen Beteiligten (technisch und nicht technisch) in der Discovery Phase verfeinert.
+Diese Meetings schärfen das gemeinsame Verständnis innerhalb des Teams bzgl. Geschäftsregeln und Umfang der Umsetzung. 
+Dabei werden konkrete Beispiele aus Sicht der Endanwender*innen des Systems verwendet.
+Das Benötigen von weiteren Infomationen um Verständnislücken zu schliessen oder die Verringerung des Umfangs der User Story könnten ein Outcome dieses Workshops sein. 
+
+Bei den Discovery Workshops nimmt nicht das gesamte Team teil, als Daumenregel sollten drei bis sechs Personen teilnehmen. 
+Dabei sollte darauf geachtet werden, dass mindestens die _Three Amigos_ aus den Bereichen Fach, Test und Entwicklung anwesend sind, um die verschiedenen Perspektiven zu berücksichtigen.
+
+Für die Durchführung von Discovery Workshops gibt es verschiedene, kollaborative Methoden:
+
+- https://cucumber.io/blog/bdd/example-mapping-introduction/[Example Mapping]
+- https://johnfergusonsmart.com/feature-mapping-a-simpler-path-from-stories-to-executable-acceptance-criteria/[Feature Mapping]
+- https://jennyjmar.com/2016/04/16/bdd-discovery-and-oopsi/[OOPSI Mapping (Outcome, Outputs, Processes, Scenarios, Inputs)]
+
+=== Formulation
+
+Nachdem in den Discovery Workshops Beispiele identifiziert wurden, werden diese in eine strukturierte Form überführt, die als Dokumentation bzw. Spezifikation dient.
+Dadurch wird sichergestellt, dass ein gemeinsames Verständnis darüber existiert, was tatsächlich umgesetzt werden soll.
+
+Dafür wird eine Sprache verwendet, die sowohl vom Menschen als auch von Maschinen verstanden wird. 
+Im Falle von Cucumber erfolgt dies mittels https://cucumber.io/docs/gherkin/[Gherkin].
+Ein einfaches Beispiel kann so aussehen:
+
+[source, gherkin]
+----
+Feature: Add information to CV
+
+  Scenario: An employee adds a certificate to the CV
+    Given An empty CV
+    When I add the certificate "Java SE 8 OCP" that I received on 12.03.2018 to my CV
+    Then My CV contains the certificate "Java SE 8 OCP"
+----
+
+Durch die Verwendung von Gherkin können diese Szenarien automatisiert ausgeführt werden. 
+Darüber hinaus kann das gesamte Team Feedback zu den formulierten Szenarien geben, da keine technischen Kenntnisse erforderlich sind.
+
+Ein weiterer Vorteil in Hinblick auf Domain Driven Design ergibt sich durch die kollaborative Erstellung der Spezifikation, wodurch eine gemeinsame Sprache (Ubiquitous Language) etabliert werden kann.
+Die Verwendung dieser Sprache in der Spezifikation trägt dazu bei, die Begriffe der Domäne auch im Code zu verankern.  
+
+=== Automation
+
+Im dritten Schritt werden die zuvor formulierten Beispiele automatisiert, in dem die einzelnen Testschritte mit dem zu testenden System verbunden werden.
+Dies erfolgt über die Erstellung von sogenannten Glue-Code.
+
+Die Automatisierung der Szenarien erfolgt schrittweise, ein Szenario nach dem anderen. 
+Da die zu testende Funktionalität noch nicht implementiert ist, wird das entsprechende Szenario (analog zum TDD) zunächst fehlschlagen.
+Anschliessend erfolgt die Implementierung der neuen Features, wobei weitere Szenarien erstellt werden, die das Verhalten von internen Systemkomponenten beschreiben und abdecken. 
+Die Szenarien unterstützen bei der täglichen Implementierung und helfen den Fortschritt nachverfolgen zu können.
+
+Auch bei der späteren Wartung des Systems oder der Einarbeitung von neuen Mitarbeitenden unterstützen die Szenarien, in dem sie helfen das aktuelle Verhalten des Systems zu verstehen. 
+Darüber hinaus bilden sie ein Sicherheitsnetz und ermöglichen es Änderungen sicher und ohne ungewollte Seiteneffekte durchzuführen. 
+
+== Cucumber
+

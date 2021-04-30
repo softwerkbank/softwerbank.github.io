@@ -7,7 +7,7 @@ Der Name `Softwerkbank` ist aus den Worten _Software_ und _Werkbank_ zusammenges
 
 Bei meiner Arbeit in verschiedenen IT-Projekten liegt der Fokus zumeist nur auf die im Projekt verwendeten Technologien. 
 Deshalb möchte ich diese Seite nutzen, um über den Tellerrand zu blicken und so Kenntnisse in Technologien und Methoden, mit denen ich sonst keine direkten Berührungspunkten habe, aufzubauen bzw. zu erweitern.
-Das dabei erworbene Wissen möchte ich hier in Form von Blog-Beiträgen teilen und hoffe, dass das hier dokumentierte Wissen für den*die eine*n oder andere*n Softwareentwickler*in oder -architekt*in hilfreich ist.
+Das dabei erworbene Wissen möchte ich hier in Form von Blog-Beiträgen teilen und hoffe, dass das hier dokumentierte Wissen für andere Softwareentwickler*innen oder -architekt*innen hilfreich ist.
 
 == Über mich
 
