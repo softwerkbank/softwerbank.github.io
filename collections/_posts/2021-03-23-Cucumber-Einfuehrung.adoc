@@ -75,3 +75,169 @@ Darüber hinaus bilden sie ein Sicherheitsnetz und ermöglichen es Änderungen s
 
 == Cucumber
 
+Cucumber ist ein BDD-Tool um Anforderungen an eine Software in natürlicher Sprache zu spezifizieren und diese automatisiert auf die korrekte Umsetzung zu überprüfen. 
+Dabei wird das Verhalten eines Systems mithilfe von _Feature-Files_ unter Verwendung der https://martinfowler.com/bliki/GivenWhenThen.html[Given-When-Then]-Methode beschrieben. 
+Die einzelne Schritte (Steps) werden mit Hilfe von _Glue-Code_ (https://cucumber.io/docs/cucumber/step-definitions/[Step-Definitions]) zur Ausführung gebracht.
+
+Bevor ich im Folgenden auf die Möglichkeiten von _Feature-Files_ und den dazugehörigen _Glue-Code_ eingehe, zeige ich zunächst die Konfiguration von Cucumber im Zusammenspiel mit JUnit 5.
+
+=== Konfiguration Cucumber mit JUnit 5
+
+Um Cucumber mit JUnit 5 zu integrieren, werden drei Dependencies benötigt.
+
+[source, xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId> <1>
+        <version>5.7.1</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-java8</artifactId> <2>
+        <version>6.10.2</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-junit-platform-engine</artifactId> <3>
+        <version>6.10.2</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+----
+<1> Da wir JUnit 5 verwenden wollen, müssen wir das entsprechende API einbinden.
+<2> Um bei der Step Definition die Java 8 Syntax verwenden zu können, wird diese Abhängigkeit benötigt. 
+<3> Diese Abhängigkeit sorgt für die Integration von Cucumber mit JUnit 5.
+
+[IMPORTANT]
+====
+Die Ausführung der Tests mit dem `maven-surefire-plugin` in Version `3.0.0-M5` funktioniert, jedoch wirken sich die
+Testresultate nicht auf den Erfolg des Maven-Builds aus und die Szenarien werden nicht in die Testergebnisse aufgenommen.
+Aus diesem Grund wurde im Codebeispiel die Version `2.22.2` verwendet.
+
+Einen entsprechenden Bug habe ich im https://issues.apache.org/jira/browse/SUREFIRE-1896[Apache Jira] erstellt.
+====
+
+==== Testausführung
+
+Damit Maven Surefire die Cucumber Szenarien entdecken und ausführen kann, ist ein Workaround notwendig (siehe https://github.com/cucumber/cucumber-jvm/tree/main/junit-platform-engine#surefire-and-gradle-workarounds[cucumber-junit-platform-engine]). 
+Als Workaround wird eine leere Test Klasse angelegt und mit der `@Cucumber` Annotation versehen:
+
+[source, java]
+----
+package ch.swb.cucumber.example;
+
+import io.cucumber.junit.platform.engine.Cucumber;
+
+@Cucumber
+public class RunCucumberTest {
+
+}
+----
+
+Durch diese Klasse wird Cucumber mitgeteilt in welchem Package die Feature-Dateien liegen. 
+Diese müssen entsprechend im selben oder in einem darunterliegenden Package verortet sein. 
+Die folgende Grafik zeigt die Struktur des `src/test/resources` Verzeichnisses:
+
+.Verzeichnisstruktur
+[plantuml, 20210323/src_test_resources, svg]
+....
+@startsalt
+{
+{T
+ + src/test/resources
+ ++ ch
+ +++ swb
+ ++++ cucumber
+ +++++ introduction
+ ++++++ add_information_to_CV.feature
+ ++++++ remove_information_from_CV.feature
+ ++ junit-platform.properties
+}
+}
+@endsalt
+....
+
+In der Datei `junit-platform.properties` können der JUnit Platform verschiedenen Eigenschaften mitgeteilt werden.
+Bei diesem Codebeispiel wurden folgende Eigenschaften gesetzt:
+
+[source, properties]
+----
+cucumber.glue=ch.swb.cucumber <1>
+cucumber.publish.quiet=true <2>
+cucumber.plugin=pretty,html:target/site/cucumber-pretty.html <3>
+----
+<1> kommaseparierte Liste von package-Namen, in denen sich der Glue-Code befindet
+<2> Unterdrückung der Ausgabe des Publish-Banners nach der Testausführung
+<3> kommaseparierte Liste welche Plugins verwendet werden sollen
+
+Eine Liste der untersützten Eigenschaften ist auf der https://github.com/cucumber/cucumber-jvm/tree/main/junit-platform-engine#configuration-options[GitHub-Seite] der Cucumber JUnit Platform Engine dokumentiert.
+
+[NOTE]
+====
+Ein minimales Beispielprojekt für die Konfiguration von Cucumber mit JUnit 5 ist in meinem https://github.com/softwerkbank/cucumber-examples/tree/main/cucumber-junit5-example[GitHub Account] veröffentlicht.
+====
+
+=== Cucumber in Aktion
+
+Nun wird es Zeit zu zeigen, wie sich mit Cucumber fachliche Tests schreiben lassen.
+Um beispielsweise das im Abschnitt <<formulation>> gezeigte Szenario ausführbar zu machen, wird folgender Glue-Code benötigt:
+
+[source, java]
+----
+public class CVStepDefs implements En {
+
+  private CV cv;
+
+  public CVStepDefs() {
+    Given("An empty CV", () -> cv = new CV());
+
+    When("I add the certificate {string} that I received on {date} to my CV", (String title, LocalDate date) -> {
+      cv.addCertifcate(title, date);
+    });
+
+    Then("My CV contains the certificate {string}", (String title) -> {
+      Optional<Certificate> certificate = cv.findCertificateByTitle(title);
+      assertTrue(certificate.isPresent());
+      assertEquals(title, certificate.get().title());
+    });
+  }
+}
+----
+
+==== Lambdas vs. Annotations
+
+- Verschiedene Möglichkeiten zeigen
+
+==== Cucumber Expressions vs. Regular Expressions
+
+- Parameter Types definieren
+
+==== Parametrisierbare Tests 
+
+- Scenario Outline
+
+==== DataTable
+
+- Die automatische Konvertierungen funktionieren nicht in der Java8 Lambda-Syntax https://github.com/cucumber/common/tree/main/datatable
+
+
+==== Ausgangssituation für mehrere Szenarien definieren
+
+- Background
+
+==== Weitere Funktionalitäten
+
+- Sprachen
+- Before und After Hooks
+
+==== Quellcode
+
+
+
+== Fazit 
